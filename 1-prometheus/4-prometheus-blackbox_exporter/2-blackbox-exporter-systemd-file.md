@@ -27,7 +27,7 @@ useradd --no-create-home --shell /bin/false blackbox
 
 **EXP:**
 ```bash
-cd ~/blackbox_exporter-0.28.0.linux-amd64/
+cd blackbox_exporter-0.28.0.linux-amd64
 ```
 
 `$ ls` Result:
@@ -139,7 +139,7 @@ Type=simple
 ExecStart=/usr/local/bin/blackbox_exporter \
 	--config.file='/etc/blackbox/blackbox.yml' \
 	--web.listen-address=':9115' \
-	--log.level=info # \
+	--log.level=info
 #	--web.config.file=/etc/blackbox/web-config.yml
 
 # web-config.yml contains TLS configs.
@@ -151,6 +151,8 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 ```
+
+> Save and Exit.
 
 **4.5. Reload systemd-daemon and start the service:**
 
@@ -177,7 +179,7 @@ systemctl status blackbox.service
 ---
 ### 5. Open service ports in firewall:
 
-**Allow form source IP to `PORT: 9090` only with protocol(tcp):** **(Recommended)**
+**Allow form source IP to `PORT: 9115` only with protocol(tcp):** **(Recommended)**
 ```bash
 ufw allow from <IP> to any port 9115 proto tcp comment 'blackbox_exporter port'
 ```

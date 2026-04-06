@@ -17,6 +17,8 @@ wget https://dl.grafana.com/grafana-enterprise/release/12.4.2/grafana-enterprise
 sudo dpkg -i grafana-enterprise_12.4.2_23531306697_linux_amd64.deb
 ```
 
+> Size of .deb `202M`.
+
 **Enable `grafana-server.service`:**
 ```bash
 systemctl enable grafana-server.service
@@ -63,13 +65,14 @@ echo "deb [signed-by=/etc/apt/keyrings/grafana.asc] https://apt.grafana.com beta
 sudo apt-get update
 ```
 
-**To install Grafana OSS, run the following command:**
+**To install Grafana Enterprise, run the following command:**
 ```bash
-# Installs the latest OSS release:
-sudo apt-get install grafana -y
+# Installs the latest enterprise release:
+sudo apt-get install grafana-enterprise
+ -y
 ```
 
-> Size is about `197 MB`.
+> Size is about `202M`.
 
 **Enable `grafana-server.service`:**
 ```bash

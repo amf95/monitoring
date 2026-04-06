@@ -36,7 +36,7 @@ node_exporter-1.8.2.linux-amd64.tar.gz
 > Size is about `11M` .
  
 ---
-### 2. Extract downloaded  `node_exporter-X.X.X.linux-amd64.tar.gz` file:
+### 2. Extract downloaded  `node_exporter-x.y.z.linux-amd64.tar.gz` file:
 
 ```bash
 tar -xvf <FILE_YOU_JUST_DOWNLOADED>
@@ -53,11 +53,11 @@ node_exporter-1.8.2.linux-amd64 node_exporter-1.8.2.linux-amd64.tar.gz
 ```
 
 ---
-### 3. Get in the `node_exporter-X.X.X.linux-amd64` directory:
+### 3. Get in the `node_exporter-x.y.z.linux-amd64` directory:
 
 **EXP:**
 ```bash
-cd ~/node_exporter-1.8.2.linux-amd64/
+cd node_exporter-1.8.2.linux-amd64
 ```
 
 `$ ls` Result:
@@ -67,8 +67,15 @@ LICENSE  node_exporter  NOTICE
 
 ---
 ### 4. (Optional) Open service ports in firewall:
+
+**Allow form source IP to `PORT: 9100` only with protocol(tcp):** **(Recommended)**
 ```bash
-ufw allow 9100
+ufw allow from <IP> to any port 9100 proto tcp comment 'node_exporter port'
+```
+
+**Open port for everybody:** DANGEROUS!
+```bash
+ufw allow 9100 comment 'node_exporter port'
 ```
 
 ---

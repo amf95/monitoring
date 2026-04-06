@@ -5,3 +5,12 @@
 ---
 # Prometheus:
 
+![](assets/Pasted%20image%2020260406232246.png)
+
+![](assets/Pasted%20image%2020260406232347.png)
+
+![](assets/Pasted%20image%2020260406232439.png)
+
+![](assets/Pasted%20image%2020260406232506.png)
+
+![](assets/Pasted%20image%2020260406232725.png)

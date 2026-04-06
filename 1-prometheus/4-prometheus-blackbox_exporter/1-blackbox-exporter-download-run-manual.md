@@ -27,7 +27,7 @@ wget <LINK_YOU_JUST_COPIED>
 
 **EXP:**
 ```bash
-wget https://github.com/prometheus/blackbox_exporter/releases/download/v0.25.0/blackbox_exporter-0.28.0.linux-amd64.tar.gz
+wget https://github.com/prometheus/blackbox_exporter/releases/download/v0.28.0/blackbox_exporter-0.28.0.linux-amd64.tar.gz
 ```
 
 **`$ ls` Result:**
@@ -59,7 +59,7 @@ blackbox_exporter-0.28.0.linux-amd64 blackbox_exporter-0.28.0.linux-amd64.tar.gz
 
 **EXP:**
 ```bash
-cd ~/blackbox_exporter-0.28.0.linux-amd64/
+cd blackbox_exporter-0.28.0.linux-amd64
 ```
 
 `$ ls` Result:
@@ -70,7 +70,7 @@ blackbox_exporter  blackbox.yml  LICENSE  NOTICE
 ---
 ### 4. Open service ports in firewall:
 
-**Allow form source IP to `PORT: 9090` only with protocol(tcp):** **(Recommended)**
+**Allow form source IP to `PORT: 9115` only with protocol(tcp):** **(Recommended)**
 ```bash
 ufw allow from <IP> to any port 9115 proto tcp comment 'blackbox_exporter port'
 ```

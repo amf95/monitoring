@@ -27,7 +27,7 @@ useradd --no-create-home --shell /bin/false prometheus
 
 **EXP:**
 ```bash
-cd ~/prometheus-3.10.0.linux-amd64/
+cd prometheus-3.10.0.linux-amd64
 ```
 
 `$ ls` Result:
@@ -147,7 +147,7 @@ ExecStart=/usr/local/bin/prometheus \
 	--config.file="/etc/prometheus/prometheus.yml" \
 	--storage.tsdb.path="/var/lib/prometheus/" \
 	--web.enable-lifecycle \
-	--log.level=warn # \
+	--log.level=warn
 #	--storage.tsdb.retention.time=7d \
 #	--storage.tsdb.retention.size=512MB \
 #	--web.config.file=/etc/prometheus/web-config.yml
@@ -162,6 +162,8 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 ```
+
+> Save and Exit.
 
 **4.4. Reload systemd-daemon and start the service:**
 
@@ -188,8 +190,14 @@ systemctl status prometheus.service
 ---
 ### 7. Open service ports in firewall:
 
+**Allow form source IP to `PORT: 9090` only with protocol(tcp):** **(Recommended)**
 ```bash
-ufw allow 9090
+ufw allow from <IP> to any port 9090 proto tcp comment 'prometheus port'
+```
+
+**Open port for everybody:** DANGEROUS!
+```bash
+ufw allow 9090 comment 'prometheus port'
 ```
 
 ---

@@ -46,7 +46,7 @@ tar -xvf <FILE_YOU_JUST_DOWNLOADED>
 
 **EXP:**
 ```bash
-alertmanager-0.31.1.linux-amd64.tar.gz
+tar -xvf alertmanager-0.31.1.linux-amd64.tar.gz
 ```
 
 **`$ ls` Result:**
@@ -59,7 +59,7 @@ alertmanager-0.31.1.linux-amd64 alertmanager-0.31.1.linux-amd64.tar.gz
 
 **EXP:**
 ```bash
-cd ~/alertmanager-0.31.1.linux-amd64
+cd alertmanager-0.31.1.linux-amd64
 ```
 
 `$ ls` Result:
@@ -70,7 +70,7 @@ alertmanager  alertmanager.yml  amtool  LICENSE  NOTICE
 ---
 ### 4. Open service ports in firewall:
 
-**Allow form source IP to `PORT: 9090` only with protocol(tcp):** **(Recommended)**
+**Allow form source IP to `PORT: 9093` only with protocol(tcp):** **(Recommended)**
 ```bash
 ufw allow from <IP> to any port 9093 proto tcp comment 'alertmanager port'
 ```

@@ -8,7 +8,11 @@
 > **node_exporter:** [node_exporter-1.8.2.linux-amd64](https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz)
 
 ---
->**Note:** This tutorial assumes that you already downloaded and extracted `node_exporter-X.X.X.linux-amd64` folder. where `X.X.X` is the version of your choice.
+
+>**Note:** This tutorial assumes that you already downloaded and extracted `node_exporter-x.y.z.linux-amd64` folder. where `x.y.z` is the version of your choice.
+
+> **NOTE:** Either use `root` user or `sudo`.
+
 ---
 ### 1. Create `node_exporter` user for the service:
 
@@ -19,11 +23,11 @@ useradd --no-create-home --shell /bin/false node_exporter
 ```
 
 ---
-### 2. Get in the `node_exporter-X.X.X.linux-amd64` directory:
+### 2. Get in the `node_exporter-x.y.z.linux-amd64` directory:
 
 **EXP:**
 ```bash
-cd ~/node_exporter-1.8.2.linux-amd64/
+cd node_exporter-1.8.2.linux-amd64
 ```
 
 `$ ls` Result:
@@ -39,6 +43,11 @@ LICENSE  node_exporter  NOTICE
 ```bash
 cp node_exporter /usr/local/bin/ \
 && chown node_exporter:node_exporter /usr/local/bin/node_exporter
+```
+
+**3.2. Create `/var/log/node_exporter/` folder for relocated logs.**
+```bash
+mkdir /var/log/node_exporter/ && chown node_exporter:node_exporter /var/log/node_exporter/
 ```
 
 ---
@@ -93,24 +102,12 @@ chown -R node_exporter:node_exporter /etc/node_exporter
 ---
 ### 4. Create systemd `node_exporter.service`:
 
-**4.1. Create `/var/log/node_exporter/` folder for relocated logs.**
-
-```bash
-mkdir /var/log/node_exporter/ && chown node_exporter:node_exporter /var/log/node_exporter/
-```
-
-**4.2. Create `node_exporter.service` file:**
+**4.1. Create `node_exporter.service` file:**
 ```bash
 vim  /etc/systemd/system/node_exporter.service
 ```
 
-**4.3. Add the following:**
-
-> **Note: if you are gonna use TLS modify `ExecStart` as follows:**
-```bash
-ExecStart=/usr/local/bin/node_exporter_exporter --config.file='/etc/node_exporter/node_exporter.yml' --web.listen-address=':9100' --log.level=warn --web.config.file="/etc/node_exporter/web-config.yml"
-```
-
+**4.2. Add the following:**
 ```bash
 [Unit]
 
@@ -138,6 +135,9 @@ ExecStart=/usr/local/bin/node_exporter \
 #	--collector.systemd \
 	--web.listen-address=':9100' \
 	--log.level=warn
+#    --web.config.file="/etc/node_exporter/web-config.yml"
+
+# web-config.yml contains TLS configs.
 
 Restart=on-failure
 
@@ -147,6 +147,8 @@ StandardError=append:/var/log/node_exporter/error.log
 [Install]
 WantedBy=multi-user.target
 ```
+
+> Save and Exit.
 
 **4.3. Reload systemd-daemon and start the service:**
 
@@ -172,8 +174,15 @@ systemctl status node_exporter.service
 
 ---
 ### 5. Open service ports in firewall:
+
+**Allow form source IP to `PORT: 9100` only with protocol(tcp):** **(Recommended)**
 ```bash
-ufw allow 9100
+ufw allow from <IP> to any port 9100 proto tcp comment 'node_exporter port'
+```
+
+**Open port for everybody:** DANGEROUS!
+```bash
+ufw allow 9100 comment 'node_exporter port'
 ```
 
 ---

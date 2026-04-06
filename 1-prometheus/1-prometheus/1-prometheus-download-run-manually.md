@@ -60,7 +60,7 @@ prometheus-3.10.0.linux-amd64 prometheus-3.10.0.linux-amd64.tar.gz
 
 **EXP:**
 ```bash
-cd ~/prometheus-3.10.0.linux-amd64/
+cd prometheus-3.10.0.linux-amd64
 ```
 
 `$ ls` Result:

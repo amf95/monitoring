@@ -30,7 +30,7 @@ useradd --no-create-home --shell /bin/false alertmanager
 
 **EXP:**
 ```bash
-cd ~/alertmanager-0.31.1.linux-amd64
+cd alertmanager-0.31.1.linux-amd64
 ```
 
 `$ ls` Result:
@@ -143,7 +143,7 @@ systemctl status alertmanager.service
 ---
 ### 5. Open service ports in firewall:
 
-**Allow form source IP to `PORT: 9090` only with protocol(tcp):** **(Recommended)**
+**Allow form source IP to `PORT: 9093` only with protocol(tcp):** **(Recommended)**
 ```bash
 ufw allow from <IP> to any port 9093 proto tcp comment 'alertmanager port'
 ```
