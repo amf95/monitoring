@@ -1,10 +1,17 @@
-## What is monitoring?
-Monitoring is  **collecting, analyzing, and alerting** on predefined **metrics and logs** to track system performance and detect issues.
+
+
+> **Note**: You can use containers or virtual machines for these services.
+
+> **Note**: This tutorial teaches you how to install monitoring services on an offline machine manually and all the instructions can be turned into a script or **Ansible** playbook.
+
+> **Note**: In this tutorial I'll be using virtual machines for the sake of simplicity.
+
+> **Note**: Almost every major service has its own Prometheus exporter like: mySQL, Nginx, Haproxy, Apache, ...
 
 ---
 ## How everything works together?
 
-![](assets/system-architecture-prometheus.svg)
+![](1-prometheus/assets/prometheus-system-architecture-and-how-it-works.svg)
 
 ---
 ## Table of content:

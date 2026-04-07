@@ -13,5 +13,8 @@
 
 >**Exporters EXP**: `blackbox exporter`: for end point metrics, `node exporter`: for OS and machine metrics, `nginx exporter`: extracts nginx service metrics, `mySQL exporter`: for mySQL database metrics, `process exporter`: for processes metrics, ... [Click for more about exporters](https://prometheus.io/docs/instrumenting/exporters/).
 
-**How everything  works together:**
+---
+
+# How everything  works together?
+
 ![](assets/prometheus-system-architecture-and-how-it-works.svg)
