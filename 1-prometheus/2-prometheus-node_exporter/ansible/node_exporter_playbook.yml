@@ -1,0 +1,133 @@
+---
+- name: Install and configure Prometheus Node Exporter
+  hosts: moodle_ubuntu_targets
+  become: true # sudo
+
+  vars:
+    node_exporter_version: "1.11.1"
+    node_exporter_user: "node_exporter"
+    node_exporter_port: "9100"
+    node_exporter_install_dir: "/usr/local/bin"
+    node_exporter_log_dir: "/var/log/node_exporter"
+    node_exporter_archive: "node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz"
+    node_exporter_tmp_dir: "/tmp"
+    node_src_exporter_path: "."
+    prometheus_server_ip: "192.168.1.119"
+    firewall_daemon: "ufw" # or firewalld
+
+  tasks:
+    - name: Check if hosts are reachable
+      ping:
+      register: ping_result
+
+    - name: Show ping result
+      debug:
+        msg: "{{ inventory_hostname }} is online"
+
+    - name: Create node_exporter system user
+      user:
+        name: "{{ node_exporter_user }}"
+        shell: /bin/false
+        create_home: false
+        system: true
+
+    - name: Copy Node Exporter archive to target server
+      copy:
+        src: "{{ node_src_exporter_path }}/{{ node_exporter_archive }}"
+        dest: "{{ node_exporter_tmp_dir }}/{{ node_exporter_archive }}"
+        mode: "0644"
+
+    - name: Extract Node Exporter archive
+      unarchive:
+        src: "{{ node_exporter_tmp_dir }}/{{ node_exporter_archive }}"
+        dest: "{{ node_exporter_tmp_dir }}"
+        remote_src: true
+        creates: "{{ node_exporter_tmp_dir }}/node_exporter-{{ node_exporter_version }}.linux-amd64"
+
+    - name: Copy Node Exporter bin file to {{ node_exporter_install_dir }}
+      copy:
+        src: "{{ node_exporter_tmp_dir }}/node_exporter-{{ node_exporter_version }}.linux-amd64/node_exporter"
+        dest: "{{ node_exporter_install_dir }}"
+        remote_src: true
+        mode: "0755"
+        owner: "{{ node_exporter_user }}"
+        group: "{{ node_exporter_user }}"
+
+    - name: Create logs directory
+      file:
+        path: /var/log/node_exporter
+        state: directory
+        mode: '0755'
+        owner: "{{ node_exporter_user }}"
+        group: "{{ node_exporter_user }}"
+
+    - name: Create systemd service file
+      copy:
+        dest: /etc/systemd/system/node_exporter.service
+        mode: "0644"
+        content: |
+          [Unit]
+
+          Description="node_exporter extracts system metrics and reports it to prometheus. Default web ui http://localhost:{{ node_exporter_port }}/metrics"
+
+          Wants=network-online.target
+
+          After=network-online.target
+
+          # wait x seconds between each time you try to restart on-failure.
+          StartLimitIntervalSec=30
+
+          # try to restart service x times on-failure
+          StartLimitBurst=3  
+
+          [Service]
+
+          User=node_exporter
+
+          Group=node_exporter
+
+          Type=simple
+
+          ExecStart=/usr/local/bin/node_exporter \
+          #	--collector.systemd \
+            --web.listen-address=':{{ node_exporter_port }}' \
+            --log.level=warn
+          #    --web.config.file="/etc/node_exporter/web-config.yml"
+
+          # web-config.yml contains TLS configs.
+
+          Restart=on-failure
+
+          # node-exporter only outputs one file for all logs(info, warn, error,...). 
+          StandardError=append:/var/log/node_exporter/error.log
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Reload systemd daemon
+      systemd:
+        daemon_reload: true
+
+    - name: Enable and start Node Exporter
+      systemd:
+        name: node_exporter
+        enabled: true
+        state: started
+
+    - name: Open firewall for Node Exporter
+      block:
+        - name: Open port on Ubuntu (ufw)
+          ufw:
+            rule: allow
+            port: "{{ node_exporter_port }}"
+            proto: tcp
+            from_ip: "{{ prometheus_server_ip }}"
+          when: firewall_daemon == "ufw"
+
+    - name: Open port on RedHat (firewalld)
+      firewalld:
+        rich_rule: "rule family='ipv4' source address='{{ prometheus_server_ip }}' port port='{{ node_exporter_port }}' protocol='tcp' accept"
+        permanent: true
+        state: enabled
+        immediate: true
+      when: firewall_daemon == "RedHat"

@@ -43,7 +43,7 @@ modules:
     http:  # http configs.
       valid_status_codes: [200, 201, 202, 204]
       follow_redirects: true
-# `fail_if_not_ssl: false` will endpoint as UP even if SSL certificate is expired.
+# `fail_if_not_ssl: false` will mark endpoint as UP even if SSL certificate is expired.
       fail_if_not_ssl: false
       ip_protocol_fallback: false # don't switch to ipv6 if ipv4 doesn't work.
       method: GET # default is GET request.

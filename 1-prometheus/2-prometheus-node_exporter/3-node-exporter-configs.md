@@ -2,7 +2,7 @@
 >
 > **OS**: `Ubuntu 24.04`.
 >
-> **node_exporter:** [node_exporter-1.8.2.linux-amd64](https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz)
+> **node_exporter:** [node_exporter-1.11.1.linux-amd64](https://github.com/prometheus/node_exporter/releases/download/v1.11.1/node_exporter-1.11.1.linux-amd64.tar.gz)
 
 ---
 

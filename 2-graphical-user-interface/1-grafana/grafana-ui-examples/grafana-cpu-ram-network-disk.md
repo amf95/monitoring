@@ -1,3 +1,11 @@
+![](assets/Pasted%20image%2020260407224114.png)
+
+![](assets/Pasted%20image%2020260407224147.png)
+
+![](assets/Pasted%20image%2020260407224226.png)
+
+![](assets/Pasted%20image%2020260407224243.png)
+
 ```json
 {
   "__inputs": [
@@ -16,7 +24,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.5.2"
+      "version": "12.4.2"
     },
     {
       "type": "datasource",
@@ -51,7 +59,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
   "links": [],
   "panels": [
     {
@@ -92,6 +99,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -109,7 +117,7 @@
             "steps": [
               {
                 "color": "transparent",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -149,7 +157,7 @@
         ]
       },
       "gridPos": {
-        "h": 24,
+        "h": 22,
         "w": 24,
         "x": 0,
         "y": 0
@@ -171,7 +179,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.4.2",
       "targets": [
         {
           "datasource": {
@@ -180,7 +188,6 @@
           },
           "editorMode": "code",
           "expr": "# cpu utilzation:\n100 * (1 - avg(rate(node_cpu_seconds_total{mode=\"idle\", job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"}[1m])))",
-          "hide": false,
           "instant": false,
           "interval": "",
           "legendFormat": "utilzation",
@@ -195,7 +202,6 @@
           "editorMode": "code",
           "expr": "# cpu idle\n# should be a the bottom of the queries.\nsum(irate(node_cpu_seconds_total{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\", mode=\"idle\"}[$__rate_interval])) / scalar(count(count(node_cpu_seconds_total{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"}) by (cpu))) * 100",
           "format": "time_series",
-          "hide": false,
           "intervalFactor": 1,
           "legendFormat": "Idle",
           "range": true,
@@ -241,6 +247,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -257,7 +264,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -279,10 +286,10 @@
         ]
       },
       "gridPos": {
-        "h": 24,
+        "h": 22,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 22
       },
       "id": 20,
       "options": {
@@ -300,7 +307,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.4.2",
       "targets": [
         {
           "datasource": {
@@ -369,6 +376,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -385,7 +393,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -422,10 +430,10 @@
         ]
       },
       "gridPos": {
-        "h": 9,
+        "h": 22,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 44
       },
       "id": 27,
       "options": {
@@ -446,7 +454,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.4.2",
       "targets": [
         {
           "datasource": {
@@ -516,6 +524,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -531,7 +540,7 @@
             "steps": [
               {
                 "color": "transparent",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -604,7 +613,7 @@
         "h": 22,
         "w": 24,
         "x": 0,
-        "y": 57
+        "y": 66
       },
       "id": 5,
       "options": {
@@ -622,18 +631,18 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.4.2",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "editorMode": "code",
           "expr": "# total\nnode_memory_MemTotal_bytes{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"}",
           "legendFormat": "Total",
           "range": true,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "refId": "A"
         },
         {
           "datasource": {
@@ -642,7 +651,6 @@
           },
           "editorMode": "code",
           "expr": "# used\nnode_memory_MemTotal_bytes{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"}\n - node_memory_MemFree_bytes{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"}\n - (node_memory_Cached_bytes{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"}\n + node_memory_Buffers_bytes{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"}\n + node_memory_SReclaimable_bytes{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"})",
-          "hide": false,
           "instant": false,
           "legendFormat": "Used",
           "range": true,
@@ -655,7 +663,6 @@
           },
           "editorMode": "code",
           "expr": "# free\nnode_memory_MemFree_bytes{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"}",
-          "hide": false,
           "instant": false,
           "legendFormat": "Free",
           "range": true,
@@ -668,7 +675,6 @@
           },
           "editorMode": "code",
           "expr": "# chache + buffer\nnode_memory_Cached_bytes{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"} \n+ node_memory_Buffers_bytes{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"} \n+ node_memory_SReclaimable_bytes{job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"}",
-          "hide": false,
           "instant": false,
           "legendFormat": "Cache+Buffer",
           "range": true,
@@ -679,8 +685,9 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "5s",
-  "schemaVersion": 40,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": [
@@ -697,6 +704,7 @@
         },
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "sort": 1,
         "type": "query"
       },
@@ -713,6 +721,7 @@
         },
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "sort": 1,
         "type": "query"
       }
@@ -733,7 +742,7 @@
   "timezone": "Africa/Cairo",
   "title": "Example: CPU, Memory, Network, Disk Metrics Charts AMF95's Edition.",
   "uid": "dfewa560p7xtsf",
-  "version": 6,
+  "version": 2,
   "weekStart": ""
 }
 ```

@@ -4,7 +4,7 @@ vim /etc/blackbox/blackbox.yml
 ```
 
 ```yml
-modules:  
+modules:
   http_2xx:
     prober: http
     http:
@@ -66,4 +66,19 @@ modules:
     timeout: 5s
     icmp:
       ttl: 5
+  http_3xx:
+    prober: http
+    http:
+      preferred_ip_protocol: "ip4"
+      enable_http3: true
+      enable_http2: false
+      valid_http_versions: ["HTTP/3.0"]
+  postgresql:
+    prober: tcp
+    tcp:
+      query_response:
+      - send: !!binary AAAACATSFi8= # 0x00, 0x00, 0x00, 0x08, 0x04, 0xD2, 0x16, 0x2F - PostgreSQL SSLRequest
+      - expect_bytes: S # 0x53 - Reply will be 'S' if SSL is enabled, and 'N' if it is not.
+      - starttls: true
+
 ```

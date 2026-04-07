@@ -5,7 +5,7 @@
 >
 > **OS**: `Ubuntu 24.04`.
 >
-> **node_exporter:** [node_exporter-1.8.2.linux-amd64](https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz)
+> **node_exporter:** [node_exporter-1.11.1.linux-amd64](https://github.com/prometheus/node_exporter/releases/download/v1.11.1/node_exporter-1.11.1.linux-amd64.tar.gz)
 
 ---
 ### 1. Download `node_exporter`:
@@ -25,12 +25,12 @@ wget <LINK_YOU_JUST_COPIED>
 
 **EXP:**
 ```bash
-wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
+wget https://github.com/prometheus/node_exporter/releases/download/v1.11.1/node_exporter-1.11.1.linux-amd64.tar.gz
 ```
 
 **`$ ls` Result:**
 ```bash
-node_exporter-1.8.2.linux-amd64.tar.gz
+node_exporter-1.11.1.linux-amd64.tar.gz
 ```
 
 > Size is about `11M` .
@@ -44,12 +44,12 @@ tar -xvf <FILE_YOU_JUST_DOWNLOADED>
 
 **EXP:**
 ```bash
-tar -xvf node_exporter-1.8.2.linux-amd64.tar.gz
+tar -xvf node_exporter-1.11.1.linux-amd64.tar.gz
 ```
 
 **`$ ls` Result:**
 ```bash
-node_exporter-1.8.2.linux-amd64 node_exporter-1.8.2.linux-amd64.tar.gz
+node_exporter-1.11.1.linux-amd64 node_exporter-1.11.1.linux-amd64.tar.gz
 ```
 
 ---
@@ -57,7 +57,7 @@ node_exporter-1.8.2.linux-amd64 node_exporter-1.8.2.linux-amd64.tar.gz
 
 **EXP:**
 ```bash
-cd node_exporter-1.8.2.linux-amd64
+cd node_exporter-1.11.1.linux-amd64
 ```
 
 `$ ls` Result:
