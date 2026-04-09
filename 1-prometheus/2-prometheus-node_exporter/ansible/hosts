@@ -1,9 +1,9 @@
 [moodle_ubuntu_targets]
-moodle-lb-01 ansible_host=192.168.1.112 ansible_user=ahmed ansible_password=myPassword ansible_become=yes ansible_become_password=myPassword
-moodle-lb-02 ansible_host=192.168.1.113 ansible_user=ahmed ansible_password=myPassword ansible_become=yes ansible_become_password=myPassword
-moodle-app-01 ansible_host=192.168.1.114 ansible_user=ahmed ansible_password=myPassword ansible_become=yes ansible_become_password=myPassword
-moodle-app-02 ansible_host=192.168.1.115 ansible_user=ahmed ansible_password=myPassword ansible_become=yes ansible_become_password=myPassword
-moodle-redis ansible_host=192.168.1.116 ansible_user=ahmed ansible_password=myPassword ansible_become=yes ansible_become_password=myPassword
-moodle-nfs ansible_host=192.168.1.117 ansible_user=ahmed ansible_password=myPassword ansible_become=yes ansible_become_password=myPassword
-moodle-database ansible_host=192.168.1.118 ansible_user=ahmed ansible_password=myPassword ansible_become=yes ansible_become_password=myPassword
+moodle-lb-01 ansible_host=192.168.1.112 ansible_user=ahmed ansible_password=toortoor ansible_become=yes ansible_become_password=toortoor
+moodle-lb-02 ansible_host=192.168.1.113 ansible_user=ahmed ansible_password=toortoor ansible_become=yes ansible_become_password=toortoor
+moodle-app-01 ansible_host=192.168.1.114 ansible_user=ahmed ansible_password=toortoor ansible_become=yes ansible_become_password=toortoor
+moodle-app-02 ansible_host=192.168.1.115 ansible_user=ahmed ansible_password=toortoor ansible_become=yes ansible_become_password=toortoor
+moodle-redis ansible_host=192.168.1.116 ansible_user=ahmed ansible_password=toortoor ansible_become=yes ansible_become_password=toortoor
+moodle-nfs ansible_host=192.168.1.117 ansible_user=ahmed ansible_password=toortoor ansible_become=yes ansible_become_password=toortoor
+moodle-database ansible_host=192.168.1.118 ansible_user=ahmed ansible_password=toortoor ansible_become=yes ansible_become_password=toortoor
 

@@ -6,6 +6,8 @@
 
 ---
 
+> **NOTE**: It better to turn logs off in `systemd` service file so that they wont take much space.
+
 >**Default location for systemd service logs is in `/var/log/messages`**
 
 or

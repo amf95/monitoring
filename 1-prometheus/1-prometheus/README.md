@@ -18,3 +18,5 @@
 # How everything  works together?
 
 ![](assets/prometheus-system-architecture-and-how-it-works.svg)
+
+Note: The tutorial focuses on installing all of these services manually for the sake of learning but of course everything can be automated using scripts or ansible.
