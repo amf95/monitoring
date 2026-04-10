@@ -1067,7 +1067,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "# node_network_speed_bytes{device!~\"lo.*|veth.*|docker.*|br.*|virbr.*|tun.*|tap.*|bond.*|dummy.*|sit.*|ip6tnl.*|flannel.*|cali.*|cilium.*|kube.*|weave.*|ovs.*|nlmon.*\", job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"} * 8 \nclamp_min(\n  node_network_speed_bytes{device!~\"lo.*|veth.*|docker.*|br.*|virbr.*|tun.*|tap.*|bond.*|dummy.*|sit.*|ip6tnl.*|flannel.*|cali.*|cilium.*|kube.*|weave.*|ovs.*|nlmon.*\", job=\"$node_exporter_job\", job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"},\n  125000000\n) * 8",
+          "expr": "node_network_speed_bytes{device!~\"lo.*|veth.*|docker.*|br.*|virbr.*|tun.*|tap.*|bond.*|dummy.*|sit.*|ip6tnl.*|flannel.*|cali.*|cilium.*|kube.*|weave.*|ovs.*|nlmon.*\", job=\"$node_exporter_job\", instance=\"$node_exporter_instance\"} * 8 ",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2800,7 +2800,7 @@
   "timezone": "Africa/Cairo",
   "title": "Example: Full Machine Metrics AMF95's Edition.",
   "uid": "efdbhz8mybmdcf",
-  "version": 8,
+  "version": 9,
   "weekStart": ""
 }
 ```
