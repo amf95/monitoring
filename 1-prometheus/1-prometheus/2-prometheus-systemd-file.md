@@ -40,28 +40,28 @@ LICENSE  NOTICE  prometheus  prometheus.yml  promtool
 
 **3.1. Move `prometheus`  `promtool` executables to `/usr/local/bin/`:**
 ```bash
-cp prometheus promtool /usr/local/bin/ \
-&& chown prometheus:prometheus /usr/local/bin/prometheus /usr/local/bin/promtool
+cp prometheus promtool /usr/local/bin/
+chown prometheus:prometheus /usr/local/bin/prometheus /usr/local/bin/promtool
 ```
 
 **3.2. Create `/var/log/prometheus/` folder for relocated logs:**
 ```bash
-mkdir /var/log/prometheus/ \
-&& chown prometheus:prometheus /var/log/prometheus/
+mkdir /var/log/prometheus/
+chown prometheus:prometheus /var/log/prometheus/
 ```
 
 **3.3. Create path for database:**
 ```bash
-mkdir -p /var/lib/prometheus \
-&& chown -R prometheus:prometheus /var/lib/prometheus
+mkdir -p /var/lib/prometheus
+chown -R prometheus:prometheus /var/lib/prometheus
 ```
 
 **3.4. Create path for configs and move it:**
 ```bash
-mkdir -p /etc/prometheus \
-&& touch alert_rules.yml \
-&& cp prometheus.yml /etc/prometheus \
-&& chown -R prometheus:prometheus /etc/prometheus
+mkdir -p /etc/prometheus
+touch alert_rules.yml
+cp prometheus.yml /etc/prometheus
+chown -R prometheus:prometheus /etc/prometheus
 ```
 
 ---
@@ -80,7 +80,7 @@ prometheus --config.file="prometheus.yml" --web.enable-lifecycle
 
 >Make sure .crt singing authority is trusted by clients.
 
-> Check the [`ssl-tls-self-signed-certificate`](../../ssl-tls-certificate-self-signed.md) documentation for more info.
+> Check the [`ssl-tls-self-signed-certificate`](../../../../ssl-tls-certificate-self-signed.md) documentation for more info.
 
 > **Note:** by default this service doesn't support password encrypted private key.
 
@@ -153,6 +153,10 @@ ExecStart=/usr/local/bin/prometheus \
 #	--web.config.file=/etc/prometheus/web-config.yml
  
 # web-config.yml contains TLS configs.
+ 
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
  
 StandardOutput=append:/var/log/prometheus/output.log
 StandardError=append:/var/log/prometheus/error.log

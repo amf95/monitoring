@@ -40,20 +40,21 @@ blackbox_exporter  blackbox.yml  LICENSE  NOTICE
 
 **3.1. Move `blackbox_exporter` executable to `/usr/local/bin/`:**
 ```bash
-cp blackbox_exporter /usr/local/bin/ \
-&& chown blackbox:blackbox /usr/local/bin/node_exporter
+cp blackbox_exporter /usr/local/bin/
+chown blackbox:blackbox /usr/local/bin/node_exporter
 ```
 
 **3.2. Create path for configs and move it:**
 ```bash
-mkdir -p /etc/blackbox \
-&& cp blackbox.yml /etc/blackbox \
-&& chown -R blackbox:blackbox /etc/blackbox
+mkdir -p /etc/blackbox
+cp blackbox.yml /etc/blackbox
+chown -R blackbox:blackbox /etc/blackbox
 ```
 
 **3.3. Create `/var/log/blackbox/` folder for relocated logs.**
 ```bash
-mkdir /var/log/blackbox/ && chown blackbox:blackbox /var/log/blackbox/
+mkdir /var/log/blackbox/
+chown blackbox:blackbox /var/log/blackbox/
 ```
 
 ---
@@ -73,7 +74,7 @@ blackbox_exporter --config.file='/etc/blackbox/blackbox.yml' --web.listen-addres
 
 >Make sure .crt singing authority is trusted by clients.
 
-> Check the  [`ssl-tls-self-signed-certificate`](../../ssl-tls-certificate-self-signed.md)  documentation for more info.
+> Check the  [`ssl-tls-self-signed-certificate`](../../../../ssl-tls-certificate-self-signed.md)  documentation for more info.
 
 > **Note:** by default this service doesn't support password encrypted private key.
 
@@ -145,6 +146,10 @@ ExecStart=/usr/local/bin/blackbox_exporter \
 # web-config.yml contains TLS configs.
 
 StandardError=append:/var/log/blackbox/error.log
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
 
 Restart=on-failure
 

@@ -41,13 +41,14 @@ LICENSE  node_exporter  NOTICE
 
 **3.1. Move `node_exporter` executable to `/usr/local/bin/`:**
 ```bash
-cp node_exporter /usr/local/bin/ \
-&& chown node_exporter:node_exporter /usr/local/bin/node_exporter
+cp node_exporter /usr/local/bin/
+chown node_exporter:node_exporter /usr/local/bin/node_exporter
 ```
 
 **3.2. Create `/var/log/node_exporter/` folder for relocated logs.**
 ```bash
-mkdir /var/log/node_exporter/ && chown node_exporter:node_exporter /var/log/node_exporter/
+mkdir /var/log/node_exporter/
+chown node_exporter:node_exporter /var/log/node_exporter/
 ```
 
 ---
@@ -66,7 +67,7 @@ node_exporter --collector.systemd --web.listen-address=':9100'
 
 >Make sure .crt singing authority is trusted by clients.
 
-> Check the  [`ssl-tls-self-signed-certificate`](../../ssl-tls-certificate-self-signed.md)  documentation for more info.
+> Check the  [`ssl-tls-self-signed-certificate`](../../../../ssl-tls-certificate-self-signed.md)  documentation for more info.
 
 > **Note:** by default this service doesn't support password encrypted private key.
 
@@ -138,6 +139,10 @@ ExecStart=/usr/local/bin/node_exporter \
 #    --web.config.file="/etc/node_exporter/web-config.yml"
 
 # web-config.yml contains TLS configs.
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
 
 Restart=on-failure
 

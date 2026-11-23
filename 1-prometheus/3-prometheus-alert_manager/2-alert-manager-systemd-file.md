@@ -43,27 +43,28 @@ alertmanager  alertmanager.yml  amtool  LICENSE  NOTICE
 
  **3.1. Move `alertmanager`  `amtool` executables to `/usr/local/bin/`:**
 ```bash
-cp alertmanager amtool /usr/local/bin/ \
-&& chown alertmanager:alertmanager /usr/local/bin/alertmanager /usr/local/bin/amtool
+cp alertmanager amtool /usr/local/bin/
+chown alertmanager:alertmanager /usr/local/bin/alertmanager /usr/local/bin/amtool
 ```
 
 **3.2. Create `/var/log/alertmanager/` folder for relocated logs.**
 
 ```bash
-mkdir /var/log/alertmanager/ && chown -R alertmanager:alertmanager /var/log/alertmanager/
+mkdir /var/log/alertmanager/
+chown -R alertmanager:alertmanager /var/log/alertmanager/
 ```
 
 **3.3. Create path for configs and move it:**
 ```bash
-mkdir -p /etc/alertmanager \
-&& cp alertmanager.yml /etc/alertmanager \
-&& chown -R alertmanager:alertmanager /etc/alertmanager
+mkdir -p /etc/alertmanager
+cp alertmanager.yml /etc/alertmanager
+chown -R alertmanager:alertmanager /etc/alertmanager
 ```
 
 **3.4. Create path for data:**
 ```bash
-mkdir -p /etc/alertmanager/data \
-&& chown -R alertmanager:alertmanager /etc/alertmanager/data
+mkdir -p /etc/alertmanager/data
+chown -R alertmanager:alertmanager /etc/alertmanager/data
 ```
 
 ---
@@ -111,6 +112,10 @@ ExecStart=/usr/local/bin/alertmanager --config.file='/etc/alertmanager/alertmana
 --storage.path=/etc/alertmanager/data
 
 StandardError=append:/var/log/alertmanager/error.log
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
 
 Restart=on-failure
 
